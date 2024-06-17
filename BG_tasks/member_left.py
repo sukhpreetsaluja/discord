@@ -8,7 +8,7 @@ class member_left(commands.Cog):
 
     @commands.Cog.listener("on_member_remove")
     async def on_member_remove(self, member):
-        goodbye_channel = self.bot.get_channel(c.GENERAL_CHANNEL)
+        goodbye_channel = self.bot.get_channel(c.GOODBYE_CHANNEL)
         await goodbye_channel.send(f"{member.name} Left the Server!")
 
 def setup(bot):

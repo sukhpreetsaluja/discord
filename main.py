@@ -14,7 +14,13 @@ async def on_ready():
         await cursor.execute("CREATE TABLE IF NOT EXISTS afk (user INTEGER, guild INTEGER, reason TEXT)")
         await cursor.execute("CREATE TABLE IF NOT EXISTS levels (level INTEGER, xp INTEGER, user INTEGER, guild INTEGER)")
         await cursor.execute("CREATE TABLE IF NOT EXISTS image_gen (user_id INTEGER, number INTEGER)")
+        await cursor.execute("CREATE TABLE IF NOT EXISTS birthdays (user_id INTEGER PRIMARY KEY, birthday TEXT NOT NULL)")
+        await bot.db.commit()
     print("Bot is Ready")
+
+'''test_cog = [
+    'birthday'
+]'''
 
 cogs_list = [
     'ai',
@@ -24,13 +30,15 @@ cogs_list = [
     'meme',
     'ping',
     'specs',
-    'weather'
+    'weather',
+    'quote'
 ]
 
 db_cogs = [
     'afk',
     'leaderboard',
-    'rank'
+    'rank',
+    'birthday'
 ]
 
 social_cogs = [
@@ -65,7 +73,8 @@ BG_tasks = [
     'leveling_system',
     'on_member_join',
     'check_links',
-    'member_left'
+    'member_left',
+    'birthday_wish'
 ]
 
 
@@ -73,8 +82,14 @@ admin_cmds = [
     'shut_down',
     'remove_user',
     'add_user',
-    'set_level'
+    'set_level',
+    'update_birthday'
 ]
+
+'''for cog in test_cog:
+    bot.load_extension(f'cogs.{cog}')
+    print(f"{cog} Loaded")'''
+
 
 for cog in cogs_list:
     bot.load_extension(f'cogs.{cog}')
@@ -104,4 +119,4 @@ for admin_cog in admin_cmds:
     bot.load_extension(f'admin_cmds.{admin_cog}')
     print(f"{admin_cog} Loaded")
 
-bot.run(c.TEST_TOKEN)
+bot.run(c.FINAL_TOKEN)
